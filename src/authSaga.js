@@ -2,7 +2,7 @@ import { AUTHENTICATE, logIn } from "./actions";
 import { serverLogIn } from "./api";
 import { takeEvery, call, put } from "redux-saga/effects";
 
-export function* authenticateSaga(action) {
+function* authenticate(action) {
   const { email, password } = action.payload;
   const success = yield call(serverLogIn, email, password);
   if (success) {
@@ -11,5 +11,5 @@ export function* authenticateSaga(action) {
 }
 
 export function* authSaga() {
-  yield takeEvery(AUTHENTICATE, authenticateSaga);
+  yield takeEvery(AUTHENTICATE, authenticate);
 }
